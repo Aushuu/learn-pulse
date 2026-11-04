@@ -68,12 +68,12 @@
 }
 
 .brand-name {
-  font-family: 'Poppins', sans-serif;
+  font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 1.35rem;
-  font-weight: 700;
+  font-weight: 800;
   color: #0f172a;
   line-height: 1.1;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.03em;
 }
 
 .brand-highlight {
@@ -316,9 +316,9 @@
 }
 
 .footer-title {
-  font-family: 'Poppins', sans-serif;
+  font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 1.3rem;
-  font-weight: 700;
+  font-weight: 800;
   color: #ffffff;
 }
 
