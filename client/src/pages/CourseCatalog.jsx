@@ -98,108 +98,110 @@ const CourseCatalog = () => {
       <section className="catalog-hero">
         <div className="hero-content">
           <div className="hero-pill">
-            <Sparkles size={15} color="#4f46e5" />
-            <span>Interactive Academy • Cloud & Atlas Ready</span>
+            <Sparkles size={14} color="#4f46e5" />
+            <span>Interactive Academy • Cloud Ready</span>
           </div>
 
           <h1 className="hero-heading">
-            Learn In-Demand Skills with <span className="gradient-text">Interactive Video & Quizzes</span>
+            Master High-Impact Skills with <span className="gradient-text">Interactive Video & Quizzes</span>
           </h1>
 
           <p className="hero-description">
-            Accelerate your software engineering career with hands-on curriculums, interactive video classrooms, and instant quizzes.
+            Accelerate your software engineering career with hands-on curriculums, video masterclasses, and verified skill certificates.
           </p>
 
           <div className="hero-stats-row">
             <div className="stat-pill-item">
-              <BookOpen size={16} color="#4f46e5" />
-              <span>Production Tracks</span>
+              <BookOpen size={15} color="#4f46e5" />
+              <span>4+ Career Tracks</span>
             </div>
             <div className="stat-pill-item">
-              <CheckCircle2 size={16} color="#10b981" />
-              <span>Interactive Quizzes & Certificates</span>
+              <CheckCircle2 size={15} color="#10b981" />
+              <span>Interactive Quizzes</span>
             </div>
             <div className="stat-pill-item">
-              <Database size={16} color="#059669" />
-              <span>MongoDB Atlas Cloud Ready</span>
+              <Award size={15} color="#f59e0b" />
+              <span>Verified Certificates</span>
             </div>
+          </div>
+        </div>
+
+        {/* Unified Discovery & Search Control Dock */}
+        <div className="discovery-control-dock">
+          {/* Top Row: Search Input + Level Select + Sort Select */}
+          <div className="dock-top-row">
+            <form onSubmit={handleSearchSubmit} className="dock-search-box">
+              <Search size={18} className="dock-search-icon" />
+              <input
+                type="text"
+                placeholder="Search courses by title, topic, or keyword..."
+                value={searchQuery}
+                onChange={handleSearchChange}
+                className="dock-search-input"
+              />
+              {searchQuery && (
+                <button
+                  type="button"
+                  onClick={() => { setSearchQuery(''); fetchCourses(''); }}
+                  className="dock-clear-btn"
+                  title="Clear search"
+                >
+                  <X size={14} />
+                </button>
+              )}
+              <button type="submit" className="dock-submit-btn">
+                Search
+              </button>
+            </form>
+
+            <div className="dock-selectors-group">
+              <div className="dock-select-pill">
+                <SlidersHorizontal size={14} color="#6366f1" />
+                <span className="dock-select-label">Level:</span>
+                <select
+                  value={selectedLevel}
+                  onChange={(e) => setSelectedLevel(e.target.value)}
+                  className="dock-select-input"
+                >
+                  {LEVELS.map(lvl => (
+                    <option key={lvl} value={lvl}>{lvl}</option>
+                  ))}
+                </select>
+              </div>
+
+              <div className="dock-select-pill">
+                <span className="dock-select-label">Sort:</span>
+                <select
+                  value={sortBy}
+                  onChange={(e) => setSortBy(e.target.value)}
+                  className="dock-select-input"
+                >
+                  <option value="rating">Top Rated</option>
+                  <option value="popular">Most Popular</option>
+                  <option value="newest">Newest First</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          {/* Bottom Row: Category Chips */}
+          <div className="dock-categories-row">
+            {CATEGORIES.map(cat => (
+              <button
+                key={cat}
+                className={`dock-category-tab ${selectedCategory === cat ? 'active' : ''}`}
+                onClick={() => setSelectedCategory(cat)}
+              >
+                <span>{cat}</span>
+              </button>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* Catalog Search & Filter Controls */}
-      <section className="catalog-filter-bar">
-        <div className="filter-controls-container">
-          {/* Centered Modern Search Input */}
-          <form onSubmit={handleSearchSubmit} className="search-form-wrapper">
-            <Search size={19} className="search-input-icon" />
-            <input
-              type="text"
-              placeholder="Search courses by title, topic, or keyword..."
-              value={searchQuery}
-              onChange={handleSearchChange}
-              className="search-input"
-            />
-            {searchQuery && (
-              <button
-                type="button"
-                onClick={() => { setSearchQuery(''); fetchCourses(''); }}
-                className="btn-clear-search"
-                title="Clear search"
-              >
-                <X size={15} />
-              </button>
-            )}
-            <button type="submit" className="btn-search-submit">
-              Search
-            </button>
-          </form>
-
-          {/* Difficulty & Sort Dropdowns */}
-          <div className="dropdowns-group">
-            <div className="filter-select-wrapper">
-              <label>Level:</label>
-              <select
-                value={selectedLevel}
-                onChange={(e) => setSelectedLevel(e.target.value)}
-                className="custom-select"
-              >
-                {LEVELS.map(lvl => (
-                  <option key={lvl} value={lvl}>{lvl}</option>
-                ))}
-              </select>
-            </div>
-
-            <div className="filter-select-wrapper">
-              <label>Sort By:</label>
-              <select
-                value={sortBy}
-                onChange={(e) => setSortBy(e.target.value)}
-                className="custom-select"
-              >
-                <option value="rating">Top Rated</option>
-                <option value="popular">Most Popular</option>
-                <option value="newest">Newest First</option>
-              </select>
-            </div>
-          </div>
-        </div>
-
-        {/* Category Pills Strip */}
-        <div className="category-chips-row">
-          {CATEGORIES.map(cat => (
-            <button
-              key={cat}
-              className={`category-chip ${selectedCategory === cat ? 'active' : ''}`}
-              onClick={() => setSelectedCategory(cat)}
-            >
-              <span>{cat}</span>
-            </button>
-          ))}
-        </div>
-
-        {/* Active Filter Indicators */}
-        {hasActiveFilters && (
+      {/* Active Filter Indicators */}
+      {hasActiveFilters && (
+        <section className="active-filters-section">
           <div className="active-filters-bar">
             <span className="results-count-text">
               Showing {courses.length} course{courses.length === 1 ? '' : 's'}
@@ -212,8 +214,8 @@ const CourseCatalog = () => {
               <span>Reset All Filters</span>
             </button>
           </div>
-        )}
-      </section>
+        </section>
+      )}
 
       {/* Course Grid Content */}
       <section className="courses-grid-section">
