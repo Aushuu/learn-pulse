@@ -103,11 +103,11 @@ const CourseCatalog = () => {
           </div>
 
           <h1 className="hero-heading">
-            Master High-Impact Engineering with <span className="gradient-text">Interactive Video & Quizzes</span>
+            Learn In-Demand Skills with <span className="gradient-text">Interactive Video & Quizzes</span>
           </h1>
 
           <p className="hero-description">
-            Accelerate your software engineering career with hands-on curriculums. Build modern MERN apps, architect AI agents, master design systems, and deploy to cloud platforms with MongoDB Atlas.
+            Accelerate your software engineering career with hands-on curriculums, interactive video classrooms, and instant quizzes.
           </p>
 
           <div className="hero-stats-row">
@@ -135,7 +135,7 @@ const CourseCatalog = () => {
             <Search size={19} className="search-input-icon" />
             <input
               type="text"
-              placeholder="Search courses by title, topic, technology, or keywords..."
+              placeholder="Search courses by title, topic, or keyword..."
               value={searchQuery}
               onChange={handleSearchChange}
               className="search-input"
@@ -150,7 +150,7 @@ const CourseCatalog = () => {
                 <X size={15} />
               </button>
             )}
-            <button type="submit" className="btn btn-primary btn-sm">
+            <button type="submit" className="btn-search-submit">
               Search
             </button>
           </form>
